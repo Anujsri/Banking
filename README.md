@@ -30,7 +30,8 @@ We have three user
   3. If a user login by Google or Facebook then we will ask him which type of user he is(lender or borrower)
      by giving him a dropdown option. so that we can add him his respective table.
      
-     
+  #
+  
                                                            
                                                     # Admin Functionalty
                                                        
@@ -40,6 +41,8 @@ We have three user
      accept his request if not then he can reject.
      
   2. Admin can see all the lender and borrower which are working with us.
+  
+  #
   
   
                                                     # Lender Functionality
@@ -51,7 +54,9 @@ We have three user
   2. Lender can see all the loan requests and after seeing all the information about the borrower of that
      respective loan request he can accept or reject the loan request.
      
-     
+ #
+    
+    
                                                      # Borrower Functionality
                                                        
                                     
@@ -63,7 +68,10 @@ We have three user
      
   3. If a loan request is accepted then he can see all the information about the lender who has accepted the 
      loan request.
-     
+  
+#
+
+
  ```
 ### Installation required for app
 ```sh
