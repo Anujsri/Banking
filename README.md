@@ -10,13 +10,14 @@
  
 ## Usage ##
 
-We have three user
+We have three user                                                                                                          
+
      1. Admin
      2. Lender
      3. Borrower
     
     
-                                                      #Basic Functionality#
+                                                   # Basic Functionality
                                                       
   1. As we have three user but for login and signup I am creating only single collection(table). I am not 
      giving any option to user for login as a admin, I have created it at the time of database creation.
@@ -30,7 +31,7 @@ We have three user
      
      
                                                            
-                                                       #Admin Functionalty#
+                                                    # Admin Functionalty
                                                        
                                                        
   1. When a lender or borrower will complete his profile a request will go to admin, and admin will check all
@@ -40,7 +41,7 @@ We have three user
   2. Admin can see all the lender and borrower which are working with us.
   
   
-                                                       #Lender Functionality#
+                                                    # Lender Functionality
                                                        
                                                        
   1. Lender can give the loan to the borrower only if his profile is completed and accepted by admin.If his profile
@@ -50,7 +51,7 @@ We have three user
      respective loan request he can accept or reject the loan request.
      
      
-                                                       #Borrower Functionality#
+                                                     # Borrower Functionality
                                                        
                                     
   1. Borrower can apply for the loan only if his profile is completed and accepted by admin.If his profile
@@ -63,8 +64,7 @@ We have three user
      loan request.
      
      
-
-         ```
+ 
     ### Installation required for app
     ```sh
     $ npm install
