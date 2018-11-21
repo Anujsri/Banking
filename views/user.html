@@ -1,0 +1,18 @@
+<div class="container" >
+	<div class="row" style="margin-top: 20%">
+		<div class="col-md-8 col-md-offset-2">
+			<form method="post" action="/users/usertypes/">
+				<div class="form-group ">
+				    <label>How do you want to login as???</label>
+				    <input hidden value="{{user.email}}" name="email">
+				    <input hidden value="{{user._id}}" name="userid">
+				   	<select class="form-control" id="sel1" name="usertype">
+				      	<option value="Lender">Lender</option>
+				      	<option value="Borrower">Borrower</option>
+				    </select>
+				</div>
+				<button type="submit" class="btn btn-info">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>

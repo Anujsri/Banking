@@ -1,0 +1,492 @@
+<div class="wrapper" >
+    <!-- Sidebar Holder -->
+   <div id="here">
+    <nav id="sidebar" style="background-color: #343E54 ">
+        <div class="sidebar-header" style="background-color: #343E54;">
+        </br>
+            <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> BORROWER</h3>
+            <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+        </div>
+        <ul class="list-unstyled components" style="margin-top: -20px">
+             
+            <li class="active">
+            {{#if borrower.completed}}
+                    <a data-toggle="pill" href="#myprofile" ><i class="fa fa-address-card" aria-hidden="true"></i>My Profile</a> </li>
+                {{else}}
+                    <a data-toggle="pill" href="#addprofile" ><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Profile</a> </li>
+            {{/if}}
+            </li>
+            <li>
+                {{#if borrower.completed}}
+                    {{#if borrower.accepted}}
+                        <a data-toggle="pill" href="#applyloan"><i class="fa fa-paper-plane" aria-hidden="true"></i>Apply For Loan</a>
+                    {{else}}
+                        <a data-toggle="modal" data-target="#myModal1" role="button"><i class="fa fa-paper-plane" aria-hidden="true"></i>Apply For Loan</a>
+                    {{/if}}
+                {{else}}
+                    <a data-toggle="modal" data-target="#myModal2" role="button"><i class="fa fa-paper-plane" aria-hidden="true"></i>Apply For Loan</a>
+                {{/if}}
+            </li>   
+            <li><a data-toggle="pill" href="#appliedloans"><i class="fa fa-folder-open-o"></i>Loan Status 
+                <span class="badge pull-right" id="vrequest"></span></a>
+            </li>
+             
+        </ul>     
+    </nav>
+   
+
+    <!-- Page Content Holder -->
+    
+    <div id="content" style="background-image: linear-gradient(to right top, #aed6f1, #bee1f1, #d1ebf3, #e6f4f6, #fbfcfc);">
+        <button type="button" id="sidebarCollapse" style="position: fixed;margin-left: -18px" >
+            <div class="contain" onclick="myFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>        
+        </button> 
+        <div class="container">
+           {{#if error_msg}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{error_msg}}</center>
+                </div>         
+            {{/if}}
+            {{#if error}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>error</center> 
+                </div>         
+            {{/if}}
+            {{#if errors}}
+                {{#each errors}}
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <center>{{msg}}</center> 
+                    </div>  
+                {{/each}}
+            {{/if}}
+            {{#if success_msg}}
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{success_msg}}</center>
+                </div>          
+            {{/if}}
+        </div>
+
+        <div class="tab-content" style="margin-top: 8%"> 
+           
+             
+
+            <!-- Graph Page End -->
+
+            <!-- Show All Products -->
+            {{#if borrower.completed}}
+            <div id="myprofile" class="tab-pane fade in active">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <center><h3 class="panel-title"><i class="fa fa-address-card" aria-hidden="true"></i> My Profile</h3></center>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px"> </div>
+                                        <div class=" col-md-9 col-lg-9 "> 
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr><td>Name : </td><td>{{borrower.name}}</td></tr>
+                                                    <tr><td>Phone : </td><td>{{borrower.phone}}</td></tr>
+                                                    <tr><td>Email : </td><td>{{borrower.email}}</td></tr>  
+                                                    <tr><td>Address : </td><td>{{borrower.address}}</td></tr>
+                                                    <tr><td>City : </td><td>{{borrower.city}}</td></tr>
+                                                    <tr><td>State : </td><td> {{borrower.state}}</td></tr>
+                                                    <tr><td>Pin Code : </td><td>{{borrower.zip}}</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer clearfix">
+                                    <span class="pull-right">
+                                        <a data-toggle="pill" href="#editprofile" type="button" class="btn btn-md btn-warning"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                                    </span>
+                                </div>   
+                            </div>
+                        </div>              
+                </div>  
+            </div>
+            {{else}}
+            <div id="addprofile" class="tab-pane fade in active">
+                <div class="row">
+                    <center>Complete Your Profile</center>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 shadow" style="border: 2px solid blue">
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" method="post"  id="add-form">
+                                <div class="form-group">
+                                    <label >Phone</label>
+                                    <input type="number" class="form-control"   placeholder="MobileNo." id="aphone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="form-control"  placeholder="address" id="aaddress" required></textarea>   
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birht</label>
+                                    <input type="date" id="adob" class="form-control"  placeholder="dob"   required>  
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label >City:</label>
+                                            <input type="text" class="form-control" placeholder="City" id="acity" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label >State:</label>
+                                            <input type="text" class="form-control" placeholder="State" id="astate" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label >Zip:</label>
+                                            <input type="text" class="form-control" placeholder="Zip" id="azip" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary btn-md" style="font-size: 20px"><i class="fa fa-telegram" aria-hidden="true"></i> Submit 
+                                        </button>
+                                    </div>    
+                                </div>
+                            </form>
+                        </div>
+                    </div> 
+
+                </div>       
+            </div>
+            {{/if}}
+                
+            <div id="editprofile" class="tab-pane fade"> 
+                <form role="form" class="form-horizontal" method="put" id="edit-form"> 
+                    <div class="row"> 
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <center><h3 class="panel-title"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</h3></center>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center"> 
+                                            <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px">
+                                        </div>
+                                        <div class=" col-md-9 col-lg-9 "> 
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr><td>Name : </td><td>
+                                                        <input type="text" id="ename" class="form-control"   value="{{borrower.name}}">
+                                                    </td></tr>
+                                                    <tr><td>Phone : </td><td> 
+                                                        <input type="number" id="ephone" class="form-control"   value="{{borrower.phone}}">
+                                                    </td></tr>
+                                                    <tr><td>Address : </td><td>
+                                                        <input type="text" id="eaddress" class="form-control"   value="{{borrower.address}}">
+                                                    </td></tr>
+                                                    <tr><td>City : </td><td> 
+                                                        <input type="text" id="ecity" class="form-control"   value="{{borrower.city}}">
+                                                    </td></tr>
+                                                    <tr><td>State : </td><td> 
+                                                        <input type="text" id="estate" class="form-control"   value="{{borrower.state}}">
+                                                    </td></tr>
+                                                    <tr><td>Pin Code : </td><td>
+                                                        <input type="number" id="ezip" class="form-control"   value="{{borrower.zip}}">
+                                                    </td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="panel-footer clearfix">
+                                    <a data-toggle="pill" href="#myprofile" ><span class="glyphicon glyphicon-backward"></span> Go Back</a>          
+                                    <button type="submit" class="btn btn-success btn-md btn-warning pull-right">
+                                    <span><i class="glyphicon glyphicon-edit"></i> Save </span></button>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- End Show All Products -->
+
+            <!-- Start Show All Vendors -->
+              
+            <div id="applyloan" class="tab-pane fade">
+                <div class="row">
+                    <center><h4>Give us Some Information About Loan</h4> </center>
+                    </br>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 shadow" style="border: 2px solid blue">
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" method="post"  id="loan-form">
+                                <div class="form-group">
+                                    <label >Amount</label>
+                                    <input type="number" class="form-control"   placeholder="enter ammount for loan." id="amount" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Account Number</label>
+                                    <input type="number" class="form-control"  placeholder="enter account number" id="accountnumber" required> 
+                                </div>
+                                <div class="form-group">
+                                    <label>Starting Date of Loan</label>
+                                    <input type="date" id="periodstart" class="form-control"  placeholder="starting date"   required>  
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ending Date of Loan</label>
+                                    <input type="date" id="periodend" class="form-control"  placeholder="end date"   required>  
+                                </div>
+                                 
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary btn-md" style="font-size: 20px"><i class="fa fa-telegram" aria-hidden="true"></i> Submit 
+                                        </button>
+                                    </div>    
+                                </div>
+                            </form>
+                        </div>
+                    </div> 
+                </div>   
+            </div> 
+
+            <div id="appliedloans" class="tab-pane fade">
+                <div class="row">
+                    {{#if loan}}
+                        {{#each loan}}
+                            <div class="col-md-4">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item active">
+                                    Loan Request
+                                     </a>
+                                    <a href="#" class="list-group-item">Ammount : {{this.amount}}</a>
+                                    <a href="#" class="list-group-item">Account No. : {{this.accountnumber}}</a>
+                                    <a href="#" class="list-group-item">From : {{this.periodstart}}</a>
+                                    <a href="#" class="list-group-item">Till : {{this.periodend}}</a>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                {{#if this.status}}
+                                                    <button onclick="seeLender('{{this.lenderid}}')" class="btn btn-warning btn-md " data-toggle="modal" data-target="#myModal" role="button">See Lender</button>
+                                                {{/if}}
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12">
+                                                {{#if this.status}}
+                                                    <h4>Accepted : Yes</h4>
+                                                {{else}}
+                                                    <h4>Accepted : No</h4>
+                                                {{/if}}
+                                            </div>
+                                             
+                                        </div>
+                                    </li>
+                                </div> 
+                            </div>
+                        {{/each}}
+                    {{else}}
+                    <center><h4>You did not apply for loan yet.</h4></center>
+                    {{/if}}
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>         
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog" style="margin-top: 80px;">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lender Detail</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info">Information of Lender</li>
+                    <li class="list-group-item"><div id="name"></div> </li>
+                    <li class="list-group-item"><div id="email"></div> </li>
+                    <li class="list-group-item"><div id="phone"></div> </li>
+                    <li class="list-group-item"><div id="address"></div> </li>
+                    <li class="list-group-item"><div id="city"></div> </li>
+                    <li class="list-group-item"><div id="state"></div> </li>
+                    <li class="list-group-item"><div id="zip"></div> </li>
+                </ul> 
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+
+ 
+<div class="modal fade" id="myModal1" role="dialog" style="margin-top: 80px;">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Information</h4>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="alert alert-info">
+                    <center>Your Profile is not accepted by Admin</center>
+                </div>
+                <hr>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+            </div> 
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal2" role="dialog" style="margin-top: 80px;">
+    <div class="modal-dialog">
+         <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Information</h4>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="alert alert-info">
+                    <center>Please complete your profile</center>
+                </div>
+                <hr>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+            </div> 
+        </div>
+         
+    </div>
+</div>
+
+ 
+ 
+ 
+ 
+<script>   
+function myFunction(x) {
+    x.classList.toggle("change");
+} 
+'{{#if borrower.completed}}'
+
+'{{else}}'
+var addForm = document.getElementById('add-form');
+  addForm.addEventListener('submit', addProfile);
+  function addProfile(e){
+      // Prevent actual submit
+      e.preventDefault();
+      var phone = document.getElementById('aphone').value;
+      var address = document.getElementById('aaddress').value;
+      var city = document.getElementById('acity').value;
+      var state = document.getElementById('astate').value;
+      var zip = document.getElementById('azip').value;
+      var dob = document.getElementById('adob').value;
+
+
+      axios.post('/borrower/completeprofile/borrower/{{user._id}}',
+        {
+            phone : phone,
+            address : address,
+            city : city,
+            state : state,
+            zip : zip,
+            dob : dob
+        }).then(function(response){
+              $( "#here" ).load(window.location.href + " #here" );
+              console.log("Profile saved!");
+          });
+  }
+'{{/if}}'
+
+
+  var editForm = document.getElementById('edit-form');
+  editForm.addEventListener('submit', editProfile);
+  function editProfile(e){
+      // Prevent actual submit
+      e.preventDefault();
+      var name = document.getElementById('ename').value;
+      var phone = document.getElementById('ephone').value;
+      var address = document.getElementById('eaddress').value;
+      var city = document.getElementById('ecity').value;
+      var state = document.getElementById('estate').value;
+      var zip = document.getElementById('ezip').value;
+
+      axios.put('/borrower/editprofile/{{borrower._id}}',
+        {
+            name : name,
+            phone : phone,
+            address : address,
+            city : city,
+            state : state,
+            zip : zip
+        }).then(function(response){
+              $( "#here" ).load(window.location.href + " #here" );
+              console.log("Profile changed!");
+          });
+  }
+
+var loanForm = document.getElementById('loan-form');
+console.log("Anuj");
+    loanForm.addEventListener('submit', loanApply);
+    function loanApply(e){
+        console.log("Anuj1");
+        // Prevent actual submit
+        e.preventDefault();
+        var amount = document.getElementById('amount').value;
+        var accountnumber = document.getElementById('accountnumber').value;
+        var periodstart = document.getElementById('periodstart').value;
+        var periodend = document.getElementById('periodend').value;
+        
+        axios.post('/borrower/loan/{{borrower._id}}',
+        {
+            amount        : amount,
+            accountnumber : accountnumber,
+            periodstart   : periodstart,
+            periodend     : periodend
+        }).then(function(response){
+              $( "#here" ).load(window.location.href + " #here" );
+              console.log("Applied!");
+          });
+  }
+
+
+function seeLender(id){
+    var id = id;
+    axios.get('/lender/lenderdetail/'+id).then(function(response){
+        document.getElementById('name').innerHTML = "Name : "+response.data.name;
+        document.getElementById('phone').innerHTML = "Phone : "+response.data.phone;
+        document.getElementById('email').innerHTML = "Email : "+response.data.email;
+        document.getElementById('address').innerHTML = "Address : "+response.data.address;
+        document.getElementById('city').innerHTML = "City : "+response.data.city;
+        document.getElementById('state').innerHTML = "State : "+response.data.state;
+        document.getElementById('zip').innerHTML = "Pin Code : "+response.data.zip;
+    })
+}
+
+</script>     
+ 

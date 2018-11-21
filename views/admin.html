@@ -1,0 +1,384 @@
+
+<div class="wrapper" >
+    <div id="here">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" style="background-color: #343E54 ">
+        <div class="sidebar-header" style="background-color: #343E54;">
+        </br>
+            <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> ADMIN</h3>
+            <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+        </div>
+        <ul class="list-unstyled components" style="margin-top: -20px">
+            
+            <li class="active" >
+                <a href="#lender" data-toggle="pill"><i class="fa fa-user"></i>All Lender</a>
+            </li> 
+            <li  >
+                <a href="#borrower" data-toggle="pill"><i class="fa fa-user"></i>All Borrower</a>
+            </li> 
+            <li><a data-toggle="pill" href="#lenderrequest"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+Lender Requests 
+                <span class="badge pull-right" id="vrequest"></span></a>
+            </li>
+            <li><a data-toggle="pill" href="#borrowerrequest"  >
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+Borrower Requests <span class="badge pull-right" id="prequest"></span></a>
+            </li>
+             
+        </ul>     
+    </nav>
+
+
+    <!-- Page Content Holder -->
+    
+    <div id="content" style="background-image: linear-gradient(to right top, #aed6f1, #bee1f1, #d1ebf3, #e6f4f6, #fbfcfc);">
+        <button type="button" id="sidebarCollapse" style="position: fixed;margin-left: -18px" >
+            <div class="contain" onclick="myFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>        
+        </button> 
+        <div class="container">
+           {{#if error_msg}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{error_msg}}</center>
+                </div>         
+            {{/if}}
+            {{#if error}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>error</center> 
+                </div>         
+            {{/if}}
+            {{#if errors}}
+                {{#each errors}}
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <center>{{msg}}</center> 
+                    </div>  
+                {{/each}}
+            {{/if}}
+            {{#if success_msg}}
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{success_msg}}</center>
+                </div>          
+            {{/if}}
+        </div>
+
+        <div class="tab-content" style="margin-top: 8%"> 
+            
+            <!-- Graph Page End -->
+
+            <div id="lenderrequest" class="tab-pane fade">
+               <div class="row">
+                {{#if lender}}
+                   {{#each lender}}
+                        {{#if this.accepted}}
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="alert alert-success">
+                                <center><h4>All request accepted</h4></center>
+                            </div>
+                        </div>
+                        
+                        {{else}}
+                        <div class="col-md-6"> 
+                            <div class="col-md-6" >
+                                <h4 >{{this.name}}  </h4>
+                                <p>{{this.information}}</p>
+                                <a data-toggle="pill" class="btn btn-primary" href="#lenderdetails" onclick="lenderDetail('{{this._id}}')">View Details</a>
+                            </div>
+                            <div class="col-md-6" >
+                                <img class="thumbnail" src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png" style="background-color: maroon">
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{else}}
+                    <center><h4>No Borrower requested yet to add</h4></center>
+                    {{/each}}
+                {{/if}}    
+               </div>
+            </div>
+
+            <div id="lenderdetails" class="tab-pane fade">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <a data-toggle="pill" href="#home"   ><span class="glyphicon glyphicon-backward"></span> Go Back</a>
+                        <div class="panel panel-primary" ng-init="getPatient()">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3" style="background-color: maroon">
+                                        <img src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png">
+                                    </div>
+                                    <div class="col-md-8">
+                                        </p id="information"></p>
+                                        <ul class="list-group">
+                                            <li class="list-group-item"><div id="name"></div></li>
+                                            <li class="list-group-item"><div id="email"></div></li>
+                                            <li class="list-group-item"><div id="phone"></div></li>
+                                            <li class="list-group-item"><div id="address"></div></li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4"><div id="city"></div></div>
+                                                    <div class="col-md-4"><div id="state"></div></div>
+                                                    <div class="col-md-4"><div id="zip"></div></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="acceptn">
+                            <div class="panel-footer clearfix">
+                                <div class="pull-right">
+                                    <a href="#home" data-toggle="pill" onclick="acceptLender();" class="btn btn-primary">Accept</a>
+                                    <a href="#home" data-toggle="pill" class="btn btn-danger" onclick="rejectLender();">Reject</a>
+                                </div>
+                            </div>  
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <div id="borrowerrequest" class="tab-pane fade">
+               <div class="row">
+                {{#if borrower}}
+                    {{#each borrower}}
+                        {{#if this.accepted}}
+                         <div class="col-md-8 col-md-offset-2">
+                            <div class="alert alert-success">
+                                <center><h4>All request accepted</h4></center>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="col-md-6"> 
+                            <div class="col-md-6" >
+                                <h4 >{{this.name}}  </h4>
+                                <p>{{this.information}}</p>
+                                <a data-toggle="pill" class="btn btn-primary" href="#borrowerdetails" onclick="borrowerDetail('{{this._id}}')">View Details</a>
+                            </div>
+                            <div class="col-md-6" >
+                                <img class="thumbnail" src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png" style="background-color: maroon">
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{else}}
+                    <center><h4>No Borrower requested yet to add</h4></center>
+                    {{/each}}
+                {{/if}}    
+               </div>
+            </div>
+
+             <div id="borrowerdetails" class="tab-pane fade">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <a data-toggle="pill" href="#home"   ><span class="glyphicon glyphicon-backward"></span> Go Back</a>
+                        <div class="panel panel-primary" ng-init="getPatient()">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3" style="background-color: maroon">
+                                        <img src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png">
+                                    </div>
+                                    <div class="col-md-8">
+                                        </p id="binformation"></p>
+                                        <ul class="list-group">
+                                            <li class="list-group-item"><div id="bname"></div></li>
+                                            <li class="list-group-item"><div id="bemail"></div></li>
+                                            <li class="list-group-item"><div id="bphone"></div></li>
+                                            <li class="list-group-item"><div id="baddress"></div></li>
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-md-4"><div id="bcity"></div></div>
+                                                    <div class="col-md-4"><div id="bstate"></div></div>
+                                                    <div class="col-md-4"><div id="bzip"></div></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="acceptnb">
+                            <div class="panel-footer clearfix">
+                                <div class="pull-right">
+                                     <a href="#home" data-toggle="pill" onclick="acceptBorrower();" class="btn btn-primary">Accept</a>
+                                    <a href="#home" data-toggle="pill" class="btn btn-danger" onclick="rejectBorrower();">Reject</a>
+                                </div>
+                            </div>
+                            </div>  
+                        </div> 
+                    </div>
+                </div>
+            </div>
+          
+
+            
+            <div id="lender" class="tab-pane fade in active">
+                <div class="row">
+                    {{#if lender}}
+                    {{#each lender}} 
+                        <div class="col-md-6"> 
+                            <div class="col-md-6" >
+                                <h4 >{{this.name}}  </h4>
+                                <p>{{this.information}}</p>
+                                {{#if this.accepted}}
+                                    <h4>Accepted : Yes</h4>
+                                {{else}}
+                                    <h4>Accepted : No</h4>
+                                {{/if}}
+                                <a data-toggle="pill" class="btn btn-primary" href="#lenderdetails" onclick="lenderDetail('{{this._id}}')">View Details</a>
+                            </div>
+                            <div class="col-md-6" >
+                                <img class="thumbnail" src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png" style="background-color: maroon">
+                            </div>
+                        </div>
+                    {{/each}}
+                    {{else}}
+                    <center><h4>No Lender requested yet to add</h4></center>
+                {{/if}}    
+                </div>         
+            </div>
+
+            <div id="borrower" class="tab-pane fade">
+                {{#if borrower}}
+                    {{#each borrower}}
+                        <div class="col-md-6"> 
+                            <div class="col-md-6" >
+                                <h4 >{{this.name}}  </h4>
+                                <p>{{this.information}}</p>
+                                {{#if this.accepted}}
+                                    <h4>Accepted : Yes</h4>
+                                {{else}}
+                                    <h4>Accepted : No</h4>
+                                {{/if}}
+                                <a data-toggle="pill" class="btn btn-primary" href="#borrowerdetails" onclick="borrowerDetail('{{this._id}}')">View Details</a>
+                            </div>
+                            <div class="col-md-6" >
+                                <img class="thumbnail" src="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Person-Male-Light-icon.png" style="background-color: maroon">
+                            </div>
+                        </div>   
+                    {{/each}}
+                    {{else}}
+                    <center><h4>No Borrower requested yet to add</h4></center>
+                {{/if}}    
+            </div>
+           
+
+        </div>
+    </div> 
+    </div>        
+</div>
+
+
+
+ 
+ 
+ 
+  <script>
+   
+function myFunction(x) {
+    x.classList.toggle("change");
+} 
+
+var id1;
+var id2;
+ 
+function lenderDetail(id){
+    var id = id;
+    axios.get('/lender/lenderdetail/'+id).then(function(response){
+        // document.getElementById('information').innerHTML = response.data.information;
+        document.getElementById('name').innerHTML = "Name : " + response.data.name;
+        document.getElementById('email').innerHTML = "Email : " + response.data.email;
+        document.getElementById('address').innerHTML ="Address : "+ response.data.address;
+        document.getElementById('phone').innerHTML ="Mobile No. : "+ response.data.phone;
+        document.getElementById('state').innerHTML ="State : "+ response.data.state;
+        document.getElementById('city').innerHTML ="City : " +response.data.city;
+        document.getElementById('zip').innerHTML ="Pin Code : " +response.data.zip;
+        
+        if(response.data.accepted === true){
+            var d = document.getElementById('acceptn');
+            d.style.display = "none";
+        }
+        else{
+            var d = document.getElementById('acceptn');
+            d.style.display = "block";
+        }
+        id1 = id;
+
+    });
+}
+
+function borrowerDetail(id){
+    var id = id;
+    id2 = id;
+    axios.get('/borrower/borrowerdetail/'+id).then(function(response){
+        // document.getElementById('information').innerHTML = response.data.information;
+        document.getElementById('bname').innerHTML ="Name : " +response.data.name;
+        document.getElementById('bemail').innerHTML ="Email : " +response.data.email;
+        document.getElementById('baddress').innerHTML ="Address : "+ response.data.address;
+        document.getElementById('bphone').innerHTML ="Mobile No. : "+ response.data.phone;
+        document.getElementById('bstate').innerHTML ="State : " +response.data.state;
+        document.getElementById('bcity').innerHTML ="City : "+ response.data.city;
+        document.getElementById('bzip').innerHTML ="Pin Code : "+ response.data.zip;
+        if(response.data.accepted === true){
+            var d = document.getElementById('acceptnb');
+            d.style.display = "none";
+        }
+        else{
+            var d = document.getElementById('acceptn');
+            d.style.display = "block";
+        }
+
+    });
+}
+
+function acceptLender(){
+   axios.get('/lender/accept/'+id1).then(function(response){
+      $( "#here" ).load(window.location.href + " #here" );
+      console.log("Accepted");
+   });
+} 
+
+function rejectLender(){
+    var div = document.createElement('div');
+    div.setAttribute('class','alert alert-danger alert-dismissible fade in');
+    var h4 = document.createElement('h4');
+    h4.setAttribute('style',"text-align:center")
+    h4 = document.createTextNode("Request has been rejected");
+    div.appendChild(h4);
+    var a = document.getElementById('reject');
+    a.appendChild(div);   
+} 
+
+function acceptBorrower(){
+   axios.get('/borrower/accept/'+id2).then(function(response){
+    $( "#here" ).load(window.location.href + " #here" );
+      console.log("Accepted");
+   });
+} 
+
+function rejectBorrower(){
+    var div = document.createElement('div');
+    div.setAttribute('class','alert alert-danger alert-dismissible fade in');
+    var h4 = document.createElement('h4');
+    h4.setAttribute('style',"text-align:center")
+    h4 = document.createTextNode("Request has been rejected");
+    div.appendChild(h4);
+    var a = document.getElementById('reject');
+    a.appendChild(div);   
+} 
+
+</script>     
+ 
