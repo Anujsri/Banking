@@ -63,21 +63,15 @@ We have three user
   3. If a loan request is accepted then he can see all the information about the lender who has accepted the 
      loan request.
      
-     
- 
-    ### Installation required for app
-    ```sh
-    $ npm install
-    ```
+ ```
+### Installation required for app
+```sh
+$ npm install
+```
 
-    ```sh
-    $ npm start
-    ```
-    ## Open Website(Heroku Link)
-    https://gittask.herokuapp.com
-
-  
-  
-  
-  
+```sh
+$ npm start
+```
+## Open Website(Heroku Link)
+https://gittask.herokuapp.com
   
