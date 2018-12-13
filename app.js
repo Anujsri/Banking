@@ -25,7 +25,7 @@ mongoose.Promise = global.Promise;
  
 
 
-mongoose.connect('mongodb://anujsri:anuj1234@ds113003.mlab.com:13003/assignment',{ useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/bank',{ useNewUrlParser: true });
 var db = mongoose.connection;
 
 var auth = require('./routes/auth')
