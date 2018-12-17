@@ -12,66 +12,26 @@
 
 We have three user                                                                                                          
 
-     1. Admin
-     2. Lender
-     3. Borrower
+     1. Actros
+     2. Producers
+     3. Movies
      
    #
     
                                                    # Basic Functionality
                                                       
-  1. As we have three user but for login and signup I am creating only single collection(table). I am not 
-     giving any option to user for login as a admin, I have created it at the time of database creation.
-  
-  2. When a user signup we will ask him which type of user he is(lender or borrower) by giving him a 
-     dropdown option.And when a user login then according to usertype we will show him his page and ask him
-     to complete his profile so that we can intesrt him his respective table(collection).
+  1. At home page a user can see all the movies and their information. User can also see all the producers and actors
+     and he can add, delete and edit actors, producers or movies information.
+    
+  2. If a user add actrors in movie which are not in our database mean a actor does'n exist with that name,so user will get a        message to add this actor in Actor Database.
      
-  3. If a user login by Google or Facebook then we will ask him which type of user he is(lender or borrower)
-     by giving him a dropdown option. so that we can add him his respective table.
+  3. If a user add producer in movie which is not in our Producers database means a producer does'n exist with that name,so        user will get a message to add this producer in Producer Database.
+  
+  4. If both actors and producer exist in database only then user can add movie with these actros and producer. 
      
   #
   
-                                                           
-                                                    # Admin Functionalty
-                                                       
-                                                       
-  1. When a lender or borrower will complete his profile a request will go to admin, and admin will check all
-     the information of lender or borrower and if admin find that he elegible to work with us then he can 
-     accept his request if not then he can reject.
-     
-  2. Admin can see all the lender and borrower which are working with us.
   
-  #
-  
-  
-                                                    # Lender Functionality
-                                                       
-                                                       
-  1. Lender can give the loan to the borrower only if his profile is completed and accepted by admin.If his profile
-     is completed but not accepted by admin he can not give the loan to borrower.
-     
-  2. Lender can see all the loan requests and after seeing all the information about the borrower of that
-     respective loan request he can accept or reject the loan request.
-     
- #
-    
-    
-                                                     # Borrower Functionality
-                                                       
-                                    
-  1. Borrower can apply for the loan only if his profile is completed and accepted by admin.If his profile
-     is completed but not accepted by admin he can not apply for the loan.
-     
-  2. Borrower can see all his loan requests and the status of loan requests whether the requests have been 
-     accepted by a lender or not.
-     
-  3. If a loan request is accepted then he can see all the information about the lender who has accepted the 
-     loan request.
-  
-#
-
-
  ```
 ### Installation required for app
 ```sh
@@ -82,6 +42,6 @@ $ npm install
 $ npm start
 ```
 ## Open Website(Heroku Link)
-https://gittask.herokuapp.com
+https://movieadda.herokuapp.com/#/
 
 #For Admin credential of this we web app mail me anujsrivastava@iiitdmj.ac.in 
