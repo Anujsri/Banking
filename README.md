@@ -77,6 +77,7 @@ replace mongodb://localhost/patients' with mongodb://username:password@ds251747.
 
 ```sh
 $ npm install
+$ npm start
 ```
 
 ```sh
